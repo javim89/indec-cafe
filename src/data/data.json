@@ -1,0 +1,304 @@
+[
+  {
+    "place": "FSOC UBA",
+    "neighborhood": "Constitucion",
+    "price": 400
+  },
+  {
+    "place": "Exactas UBA",
+    "neighborhood": "Ciudad U.",
+    "price": 400
+  },
+  {
+    "place": "Psicologia UBA",
+    "neighborhood": "Balvanera",
+    "price": 500
+  },
+  {
+    "place": "Filosofía UBA",
+    "neighborhood": "Caballito",
+    "price": 500
+  },
+  {
+    "place": "Odontología UBA",
+    "neighborhood": "Recoleta",
+    "price": 500
+  },
+  {
+    "place": "Burguer King",
+    "neighborhood": "Cadena",
+    "price": 700
+  },
+  {
+    "place": "Mostaza",
+    "neighborhood": "Cadena",
+    "price": 730
+  },
+  {
+    "place": "Mc Donalds",
+    "neighborhood": "Cadena",
+    "price": 750
+  },
+  {
+    "place": "La victoriosa",
+    "neighborhood": "Villa Urquiza",
+    "price": 770
+  },
+  {
+    "place": "Serafín",
+    "neighborhood": "P. Avellaneda",
+    "price": 800
+  },
+  {
+    "place": "Faricci",
+    "neighborhood": "Cadena",
+    "price": 850
+  },
+  {
+    "place": "La americana",
+    "neighborhood": "Centro",
+    "price": 880
+  },
+  {
+    "place": "Astromelia",
+    "neighborhood": "Monserrat",
+    "price": 900
+  },
+  {
+    "place": "El santo",
+    "neighborhood": "Boedo",
+    "price": 940
+  },
+  {
+    "place": "naranjo y flor",
+    "neighborhood": "Palermo",
+    "price": 950
+  },
+  {
+    "place": "Lo de cosme",
+    "neighborhood": "La boca",
+    "price": 1000
+  },
+  {
+    "place": "QUMA",
+    "neighborhood": "Saavedra",
+    "price": 1050
+  },
+  {
+    "place": "Tobas cafe",
+    "neighborhood": "Centro",
+    "price": 1080
+  },
+  {
+    "place": "Po' polo",
+    "neighborhood": "P. chacabuco",
+    "price": 1100
+  },
+  {
+    "place": "Varela Varelita",
+    "neighborhood": "Palermo",
+    "price": 1100
+  },
+  {
+    "place": "El socorro",
+    "neighborhood": "Retiro",
+    "price": 1100
+  },
+  {
+    "place": "Cafe portela",
+    "neighborhood": "Villa soldati",
+    "price": 1100
+  },
+  {
+    "place": "Nacha",
+    "neighborhood": "Flores",
+    "price": 1100
+  },
+  {
+    "place": "Tienda de cafe",
+    "neighborhood": "Cadena",
+    "price": 1150
+  },
+  {
+    "place": "Cafe cortazar",
+    "neighborhood": "Palermo",
+    "price": 1150
+  },
+  {
+    "place": "Lo de carlitos",
+    "neighborhood": "Belgrano",
+    "price": 1150
+  },
+  {
+    "place": "El federal",
+    "neighborhood": "San telmo",
+    "price": 1150
+  },
+  {
+    "place": "Roma",
+    "neighborhood": "Balvanera",
+    "price": 1150
+  },
+  {
+    "place": "Fadu UBA",
+    "neighborhood": "Belgrano",
+    "price": 1200
+  },
+  {
+    "place": "Pizza y birra",
+    "neighborhood": "Flores",
+    "price": 1200
+  },
+  {
+    "place": "La armonia",
+    "neighborhood": "Constitucion",
+    "price": 1200
+  },
+  {
+    "place": "Chicha",
+    "neighborhood": "Parque patricios",
+    "price": 1200
+  },
+  {
+    "place": "La orquidea",
+    "neighborhood": "Abasto",
+    "price": 1200
+  },
+  {
+    "place": "Lirio",
+    "neighborhood": "V. Riachuelo",
+    "price": 1200
+  },
+  {
+    "place": "La tolva",
+    "neighborhood": "Recoleta",
+    "price": 1240
+  },
+  {
+    "place": "Santa Cafe",
+    "neighborhood": "Monserrat",
+    "price": 1300
+  },
+  {
+    "place": "Tolón",
+    "neighborhood": "Palermo",
+    "price": 1300
+  },
+  {
+    "place": "Doc Café",
+    "neighborhood": "Villa crespo",
+    "price": 1350
+  },
+  {
+    "place": "La nueva san agustin",
+    "neighborhood": "Barrio Norte",
+    "price": 1400
+  },
+  {
+    "place": "Cafe rio",
+    "neighborhood": "Caballito",
+    "price": 1400
+  },
+  {
+    "place": "A pesar de todo",
+    "neighborhood": "Villa lugano",
+    "price": 1400
+  },
+  {
+    "place": "Caffe del doge",
+    "neighborhood": "Devoto",
+    "price": 1400
+  },
+  {
+    "place": "Manifiesto",
+    "neighborhood": "Retiro",
+    "price": 1450
+  },
+  {
+    "place": "Reggina",
+    "neighborhood": "Flores",
+    "price": 1480
+  },
+  {
+    "place": "Havanna",
+    "neighborhood": "Cadena",
+    "price": 1490
+  },
+  {
+    "place": "Bar britanico",
+    "neighborhood": "San telmo",
+    "price": 1500
+  },
+  {
+    "place": "Cobin",
+    "neighborhood": "Almagro",
+    "price": 1500
+  },
+  {
+    "place": "Pertutti",
+    "neighborhood": "Recoleta",
+    "price": 1500
+  },
+  {
+    "place": "Tostado",
+    "neighborhood": "Cadena",
+    "price": 1500
+  },
+  {
+    "place": "Franco speciality",
+    "neighborhood": "Congreso",
+    "price": 1520
+  },
+  {
+    "place": "Dandy",
+    "neighborhood": "Cadena",
+    "price": 1550
+  },
+  {
+    "place": "Bonafide",
+    "neighborhood": "Cadena",
+    "price": 1550
+  },
+  {
+    "place": "Adorado",
+    "neighborhood": "Palermo",
+    "price": 1600
+  },
+  {
+    "place": "Los galgos",
+    "neighborhood": "Centro",
+    "price": 1600
+  },
+  {
+    "place": "Cafe martinez",
+    "neighborhood": "Cadena",
+    "price": 1790
+  },
+  {
+    "place": "Gorrion",
+    "neighborhood": "Colegiales",
+    "price": 1850
+  },
+  {
+    "place": "Plaza cafe",
+    "neighborhood": "Caballito",
+    "price": 1950
+  },
+  {
+    "place": "Kisco gordo valor",
+    "neighborhood": "Constitucion",
+    "price": 2200
+  },
+  {
+    "place": "Cafe tortoni",
+    "neighborhood": "Centro",
+    "price": 2250
+  },
+  {
+    "place": "La ideal",
+    "neighborhood": "Centro",
+    "price": 3000
+  }
+]
+
+
