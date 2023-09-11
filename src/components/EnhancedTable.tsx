@@ -2,6 +2,18 @@ import React from "react";
 import { Paper, Table, TableContainer, TableBody, TableRow, TableCell, Checkbox, TablePagination } from "@mui/material";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import EnhancedTableHead from "./EnhancedTableHeads";
+import { useTheme } from '@mui/material/styles';
+import styled from "@emotion/styled";
+
+interface PriceContainerInterface {
+hoverColor?: string
+}
+const TableRowStyled = styled(TableRow)<PriceContainerInterface>`
+    background-color: ${({color}) => color};
+    &:hover {
+      background-color: ${({hoverColor}) => hoverColor} !important;
+    }
+`;
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -47,7 +59,7 @@ const EnhancedTable = ({data}: CafeDataArray) => {
   const [orderBy, setOrderBy] = React.useState<keyof CafeData>('price');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(50);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -111,6 +123,30 @@ const EnhancedTable = ({data}: CafeDataArray) => {
     [order, orderBy, page, rowsPerPage, data],
   );
 
+  const theme = useTheme();
+
+  const getColor = (price: number): string => {
+    switch (true) {
+      case price > 1000 && price <= 1500 :
+        return theme.palette.warning.main;
+      case price >= 1500 :
+        return theme.palette.error.main;
+      default:
+        return theme.palette.success.main;
+    }
+  }
+
+  const getHoverColor = (price: number): string => {
+    switch (true) {
+      case price > 1000 && price <= 1500 :
+        return theme.palette.warning.light;
+      case price >= 1500 :
+        return theme.palette.error.light;
+      default:
+        return theme.palette.success.light;
+    }
+  }
+
   return (
     <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
@@ -134,7 +170,7 @@ const EnhancedTable = ({data}: CafeDataArray) => {
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
-                  <TableRow
+                  <TableRowStyled
                     hover
                     onClick={(event) => handleClick(event, row.place)}
                     role="checkbox"
@@ -143,6 +179,8 @@ const EnhancedTable = ({data}: CafeDataArray) => {
                     key={row.place}
                     selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}
+                    color={getColor(row.price)}
+                    hoverColor={getHoverColor(row.price)}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
@@ -163,18 +201,18 @@ const EnhancedTable = ({data}: CafeDataArray) => {
                     </TableCell>
                     <TableCell>{row.neighborhood.toLocaleUpperCase()}</TableCell>
                     <TableCell>{row.price}</TableCell>
-                  </TableRow>
+                  </TableRowStyled>
                 );
               })}
-              {emptyRows > 0 && (
-                <TableRow
+              {/* {emptyRows > 0 && (
+                <TableRowStyled
                   style={{
                     height: 53 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />
-                </TableRow>
-              )}
+                </TableRowStyled>
+              )} */}
             </TableBody>
           </Table>
         </TableContainer>
