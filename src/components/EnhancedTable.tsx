@@ -1,19 +1,37 @@
 import React from "react";
-import { Paper, Table, TableContainer, TableBody, TableRow, TableCell, Checkbox, TablePagination } from "@mui/material";
+import { Paper, Table, TableContainer, TableBody, TableRow, TableCell, TablePagination, Typography } from "@mui/material";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import EnhancedTableHead from "./EnhancedTableHeads";
 import { useTheme } from '@mui/material/styles';
-import styled from "@emotion/styled";
+import { styled } from '@mui/material/styles';
 
-interface PriceContainerInterface {
-hoverColor?: string
+interface TableRowInterface {
+  color: string;
+  oddColor?: string;
+  hoverColor?: string;
 }
-const TableRowStyled = styled(TableRow)<PriceContainerInterface>`
-    background-color: ${({color}) => color};
-    &:hover {
-      background-color: ${({hoverColor}) => hoverColor} !important;
-    }
-`;
+
+interface TableCellStyledInterface {
+  color?: string;
+  textColor?: string;
+}
+
+export const TableRowStyled = styled(TableRow)<TableRowInterface>(({ theme, color, oddColor, hoverColor }) => ({
+  backgroundColor: oddColor,
+  '&:nth-of-type(odd)': {
+    backgroundColor: color,
+  },
+  '&:hover': {
+    backgroundColor: hoverColor
+  },
+}))
+
+export const TableCellStyled = styled(TableCell)<TableCellStyledInterface>(({ theme, color, textColor }) => ({
+  border: "1px solid black",
+  backgroundColor: color,
+  color: textColor,
+  width: 1
+}));
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -54,7 +72,7 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   return stabilizedThis.map((el) => el[0]);
 }
 
-const EnhancedTable = ({data}: CafeDataArray) => {
+const EnhancedTable = ({ data }: CafeDataArray) => {
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof CafeData>('price');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -127,84 +145,87 @@ const EnhancedTable = ({data}: CafeDataArray) => {
 
   const getColor = (price: number): string => {
     switch (true) {
-      case price > 1000 && price <= 1500 :
+      case price > 1000 && price <= 1500:
         return theme.palette.warning.main;
-      case price >= 1500 :
+      case price >= 1500:
         return theme.palette.error.main;
       default:
         return theme.palette.success.main;
     }
   }
 
-  const getHoverColor = (price: number): string => {
+  const getOddColor = (price: number): string => {
     switch (true) {
-      case price > 1000 && price <= 1500 :
+      case price > 1000 && price <= 1500:
         return theme.palette.warning.light;
-      case price >= 1500 :
+      case price >= 1500:
         return theme.palette.error.light;
       default:
         return theme.palette.success.light;
     }
   }
 
+  const getHoverColor = (price: number): string => {
+    switch (true) {
+      case price > 1000 && price <= 1500:
+        return theme.palette.warning.dark;
+      case price >= 1500:
+        return theme.palette.error.dark;
+      default:
+        return theme.palette.success.dark;
+    }
+  }
+
   return (
     <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={'medium'}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={data.length}
-            />
-            <TableBody>
-              {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.place);
-                const labelId = `enhanced-table-checkbox-${index}`;
+      <EnhancedTableToolbar numSelected={selected.length} />
+      <TableContainer>
+        <Table
+          sx={{ minWidth: 750 }}
+          aria-labelledby="tableTitle"
+          size={'medium'}
+        >
+          <EnhancedTableHead
+            numSelected={selected.length}
+            order={order}
+            orderBy={orderBy}
+            onSelectAllClick={handleSelectAllClick}
+            onRequestSort={handleRequestSort}
+            rowCount={data.length}
+          />
+          <TableBody>
+            {visibleRows.map((row, index) => {
+              const isItemSelected = isSelected(row.place);
+              const labelId = `enhanced-table-checkbox-${index}`;
 
-                return (
-                  <TableRowStyled
-                    hover
-                    onClick={(event) => handleClick(event, row.place)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row.place}
-                    selected={isItemSelected}
-                    sx={{ cursor: 'pointer' }}
-                    color={getColor(row.price)}
-                    hoverColor={getHoverColor(row.price)}
+              return (
+                <TableRowStyled
+                  onClick={(event) => handleClick(event, row.place)}
+                  role="checkbox"
+                  aria-checked={isItemSelected}
+                  tabIndex={-1}
+                  key={row.place}
+                  selected={isItemSelected}
+                  sx={{ cursor: 'pointer' }}
+                  color={getColor(row.price)}
+                  oddColor={getOddColor(row.price)}
+                  hoverColor={getHoverColor(row.price)}
+                >
+                  <TableCellStyled padding="checkbox" color={getHoverColor(row.price)}>
+                  </TableCellStyled>
+                  <TableCellStyled
+                    component="th"
+                    id={labelId}
+                    scope="row"
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          'aria-labelledby': labelId,
-                        }}
-                      />
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                    >
-                      {row.place.toLocaleUpperCase()}
-                    </TableCell>
-                    <TableCell>{row.neighborhood.toLocaleUpperCase()}</TableCell>
-                    <TableCell>{row.price}</TableCell>
-                  </TableRowStyled>
-                );
-              })}
-              {/* {emptyRows > 0 && (
+                    <Typography fontWeight={600}>{row.place.toLocaleUpperCase()}</Typography>
+                  </TableCellStyled>
+                  <TableCellStyled>{row.neighborhood.toLocaleUpperCase()}</TableCellStyled>
+                  <TableCellStyled>{row.price}</TableCellStyled>
+                </TableRowStyled>
+              );
+            })}
+            {/* {emptyRows > 0 && (
                 <TableRowStyled
                   style={{
                     height: 53 * emptyRows,
@@ -213,19 +234,19 @@ const EnhancedTable = ({data}: CafeDataArray) => {
                   <TableCell colSpan={6} />
                 </TableRowStyled>
               )} */}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={data.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
   )
 };
 

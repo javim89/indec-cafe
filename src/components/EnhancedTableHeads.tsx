@@ -1,7 +1,8 @@
 import React from "react";
-import { TableHead, TableRow, TableCell, Checkbox, Box, TableSortLabel } from "@mui/material";
+import { TableHead, Box, TableSortLabel, Typography } from "@mui/material";
 import { visuallyHidden } from '@mui/utils';
-
+import { TableRowStyled, TableCellStyled } from "./EnhancedTable";
+import { styled } from '@mui/material/styles';
 interface EnhancedTableProps {
   numSelected: number;
   onRequestSort: (event: React.MouseEvent<unknown>, property: keyof CafeData) => void;
@@ -17,6 +18,29 @@ interface HeadCell {
   label: string;
   numeric: boolean;
 }
+
+interface TableSortLabelStyledInterface {
+  color?: string;
+}
+
+export const TableSortLabelStyled = styled(TableSortLabel)<TableSortLabelStyledInterface>(({ theme, color }) => ({
+  color: color,
+  "&:hover": {
+    color: color,
+    '&& $icon': {
+      opacity: 1,
+      color: color
+    },
+  },
+  "$active": {
+    color: color,
+    // && instead of & is a workaround for https://github.com/cssinjs/jss/issues/1045
+    '&& $icon': {
+      opacity: 1,
+      color: color
+    },
+  },
+}))
 
 const headCells: readonly HeadCell[] = [
   {
@@ -35,7 +59,7 @@ const headCells: readonly HeadCell[] = [
     id: 'price',
     numeric: true,
     disablePadding: false,
-    label: 'Ars',
+    label: 'ARS',
   },
 ];
 
@@ -49,40 +73,47 @@ const EnhancedTableHead = (props: EnhancedTableProps) => {
 
   return (
     <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell>
+      <TableRowStyled color="red">
+        <TableCellStyled padding="checkbox" color="black">
+        </TableCellStyled>
         {headCells.map((headCell) => (
-          <TableCell
+          <TableCellStyled
+            color="#39353b"
+            textColor="white"
             key={headCell.id}
             // align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
+            // padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
+              sx={{
+                  '&.MuiTableSortLabel-root': {
+                    color: 'white',
+                  },
+                  '&.MuiTableSortLabel-root:hover': {
+                    color: 'white',
+                  },
+                  '&.Mui-active': {
+                    color: 'white',
+                  },
+                  '& .MuiTableSortLabel-icon': {
+                    color: 'white !important',
+                  },
+                }}
             >
-              {headCell.label}
+              <Typography fontWeight={600}>{headCell.label}</Typography>
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </Box>
               ) : null}
             </TableSortLabel>
-          </TableCell>
+          </TableCellStyled>
         ))}
-      </TableRow>
+      </TableRowStyled>
     </TableHead>
   );
 }
